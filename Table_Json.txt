@@ -1,0 +1,25 @@
+{
+    "Sheet1": [
+        {
+            "Title": "A Memory of Light",
+            "Source": "Brandon Sanderson, Robert Jordan",
+            "Genre": "Fantasy ",
+            "Language": "English",
+            "Series": "WOT"
+        },
+        {
+            "Title": "The Well of Ascension ",
+            "Source": "Brandon Sanderson ",
+            "Genre": "Fantasy ",
+            "Language": "English",
+            "Series": "Mistborn Saga"
+        },
+        {
+            "Title": "The Blade Itself",
+            "Source": "Joe Abercrombi",
+            "Genre": "Fantasy ",
+            "Language": "English ",
+            "Series": "The First Law"
+        }
+    ]
+}

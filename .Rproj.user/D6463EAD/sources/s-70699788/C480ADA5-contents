@@ -1,0 +1,78 @@
+---
+title: Data 607 Project-2
+author: Alex Moyse
+output: 
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float: true
+---
+
+```{r}
+library(tidyverse)
+library(openxlsx)
+library(dplyr)
+library(zoo)
+library(varhandle)
+library(rvest)
+library(RSelenium)
+library(xml2)
+library(xmlconvert)
+library(jsonlite)
+```
+<H1> The HTML Table </H1>
+
+We're going to do a basic and boring HTML table read in where first we will read in the HTML Table
+
+```{r}
+html <- read_html("table_html2.html")
+
+```
+
+Then from there we will grab the HTML node with the table, and then turn it into a dataframe, indicating keeping a header and to fill the null values if any. 
+
+```{r}
+html %>% html_node("table") %>% html_table(header =TRUE, fill = TRUE) 
+
+```
+
+And as you can see, its perfectly functional, generating a simple df of fantasy books. 
+
+<H1> XML Read in </H1>
+
+Let me first start out with I am not the most familiar with XML, I've very rarely come across XML tables. First things first, let's read in the table, then start looking at the structure of the XML. From there, let's grab the Xpath of the items and add them to their own lists. At that point let's make a dataframe, creating columns in line with the table column name. Lastly, let's drop the first row as it is not needed. 
+
+```{r}
+xml_address = "Table_XML.xml"
+
+xml_Book_List = (read_xml(xml_address))
+#xml_structure(xml_Book_List)
+#xml_text(xml_Book_List)
+xml_find_all(xml_Book_List, xpath = "//Genre_")
+xml_text(xml_find_all(xml_Book_List, xpath = "//Genre"))
+Genre <- xml_text(xml_find_all(xml_Book_List, xpath = "//Genre"))
+Title <- xml_text(xml_find_all(xml_Book_List, xpath = "//Title"))
+Source <- xml_text(xml_find_all(xml_Book_List, xpath = "//Source"))
+Language <- xml_text(xml_find_all(xml_Book_List, xpath = "//Language"))
+Series <- xml_text(xml_find_all(xml_Book_List, xpath = "//Series"))
+df <- tibble("Genre"=Genre, "Source"=Source, "Title"=Title, "Language"=Language, "Series"=Series)
+df <- df[-1,]
+df
+#f <- xmlToDataFrame(nodes = getNodeSet(xml_Book_List, "//Sheet1"))
+```
+And as you can see, the table matches the prior table, and the source excel document. 
+
+<H1> Finall, JSON </H1>
+
+As per usual, we are first going to read in the Json. From there, we will take the dataset and using the as.data.frame function to convert it into a dataframe. We will set the col.names to an empty string so it matches the formatting of the prior tables. 
+
+```{r}
+Json_address = "Table_Json.txt"
+json_raw <- fromJSON(Json_address)
+json_table <- as.data.frame(json_raw, col.names = c(""))
+json_table
+```
+
+<H1> Conclusion </H1>
+
+Clearly, I have a preference for JSON and HTMl style tables over XML for parsing into dataframes. I really thought my implementations of those two were very slick. However I do think I could improve on my XML parsing and would love to see better examples of it. 
