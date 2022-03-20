@@ -1,4 +1,4 @@
-"0","Json_address = ""Table_Json.txt"""
+"0","Json_address = ""https://raw.githubusercontent.com/Amantux/Data607_Assignment7/main/Table_Json.txt"""
 "0","json_raw <- fromJSON(Json_address)"
 "0","json_table <- as.data.frame(json_raw, col.names = c(""""))"
 "0","json_table"

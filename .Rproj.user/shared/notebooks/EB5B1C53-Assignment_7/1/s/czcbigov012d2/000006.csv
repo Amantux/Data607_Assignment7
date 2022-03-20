@@ -1,2 +1,2 @@
-"0","html <- read_html(""table_html2.html"")"
+"0","html <- read_html(""https://raw.githubusercontent.com/Amantux/Data607_Assignment7/main/table_html2.html"")"
 "0",""

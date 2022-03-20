@@ -1,4 +1,0 @@
-"0","#html_table_node <- html_elements(html, ""src"")"
-"0",""
-"0","#html_tableDf <- html_table(html_table_node)"
-"0","html %>% html_node(""table"") %>% html_table(header =TRUE, fill = TRUE) "

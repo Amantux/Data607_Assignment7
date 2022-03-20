@@ -7,6 +7,7 @@ output:
     toc: true
     toc_float: true
 ---
+<H1> The library Load in </H1>
 
 ```{r}
 library(tidyverse)
@@ -25,7 +26,7 @@ library(jsonlite)
 We're going to do a basic and boring HTML table read in where first we will read in the HTML Table
 
 ```{r}
-html <- read_html("table_html2.html")
+html <- read_html("https://raw.githubusercontent.com/Amantux/Data607_Assignment7/main/table_html2.html")
 
 ```
 
@@ -43,12 +44,12 @@ And as you can see, its perfectly functional, generating a simple df of fantasy 
 Let me first start out with I am not the most familiar with XML, I've very rarely come across XML tables. First things first, let's read in the table, then start looking at the structure of the XML. From there, let's grab the Xpath of the items and add them to their own lists. At that point let's make a dataframe, creating columns in line with the table column name. Lastly, let's drop the first row as it is not needed. 
 
 ```{r}
-xml_address = "Table_XML.xml"
+xml_address = "https://raw.githubusercontent.com/Amantux/Data607_Assignment7/main/Table_XML.xml"
 
 xml_Book_List = (read_xml(xml_address))
 #xml_structure(xml_Book_List)
 #xml_text(xml_Book_List)
-xml_find_all(xml_Book_List, xpath = "//Genre_")
+xml_find_all(xml_Book_List, xpath = "//Genre")
 xml_text(xml_find_all(xml_Book_List, xpath = "//Genre"))
 Genre <- xml_text(xml_find_all(xml_Book_List, xpath = "//Genre"))
 Title <- xml_text(xml_find_all(xml_Book_List, xpath = "//Title"))
@@ -62,12 +63,12 @@ df
 ```
 And as you can see, the table matches the prior table, and the source excel document. 
 
-<H1> Finall, JSON </H1>
+<H1> Finally, JSON </H1>
 
 As per usual, we are first going to read in the Json. From there, we will take the dataset and using the as.data.frame function to convert it into a dataframe. We will set the col.names to an empty string so it matches the formatting of the prior tables. 
 
 ```{r}
-Json_address = "Table_Json.txt"
+Json_address = "https://raw.githubusercontent.com/Amantux/Data607_Assignment7/main/Table_Json.txt"
 json_raw <- fromJSON(Json_address)
 json_table <- as.data.frame(json_raw, col.names = c(""))
 json_table
